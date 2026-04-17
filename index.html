@@ -125,16 +125,12 @@ Download PDF
 </div>
 
 <!-- INVOICE -->
-
 <div id="invoice" class="invoice-box">
 
 <div class="header">
 
-<!-- FIXED LOGO -->
-<img
-<img src="images/images.png"
-alt="Company Logo"
-class="logo">
+<!-- LOGO -->
+<img src="images/images.png" alt="Company Logo" class="logo">
 
 <div>
 <strong>GAZON COMMUNICATIONS INDIA LIMITED</strong><br>
@@ -146,9 +142,7 @@ GST No: 27AAECG8392G1Z9
 
 </div>
 
-<h2 style="text-align:center;">
- INVOICE
-</h2>
+<h2 style="text-align:center;">INVOICE</h2>
 
 <table>
 
@@ -159,8 +153,8 @@ GST No: 27AAECG8392G1Z9
 </td>
 
 <td>
-<strong>Invoice Date:</strong>
-<span id="displayDate">________</span>
+<strong>Invoice No:</strong>
+<span id="invoiceNumber">________</span>
 </td>
 </tr>
 
@@ -171,8 +165,8 @@ GST No: 27AAECG8392G1Z9
 </td>
 
 <td>
-<strong>Due Date:</strong>
-Immediate
+<strong>Invoice Date:</strong>
+<span id="displayDate">________</span>
 </td>
 </tr>
 
@@ -210,19 +204,11 @@ Ganesh Nagar, Wakad, Pune - 411057
 <td>1</td>
 
 <td>
-<span id="displayDescription">
-________
-</span>
+<span id="displayDescription">________</span>
 </td>
 
-<td class="text-right">
-2500.00
-</td>
-
-<td class="text-right">
-2500.00
-</td>
-
+<td class="text-right">2500.00</td>
+<td class="text-right">2500.00</td>
 </tr>
 
 <tr>
@@ -230,9 +216,7 @@ ________
 <strong>SGST + CGST</strong>
 </td>
 
-<td class="text-right">
-450.00
-</td>
+<td class="text-right">450.00</td>
 </tr>
 
 <tr>
@@ -241,9 +225,7 @@ ________
 </td>
 
 <td class="text-right">
-<strong>
-2950.00
-</strong>
+<strong>2950.00</strong>
 </td>
 </tr>
 
@@ -262,12 +244,8 @@ This bill is system generated.
 </p>
 
 <p style="margin-top:40px; text-align:right;">
-
 <strong>Authorised Signatory</strong><br>
-
-For  
-GAZON COMMUNICATIONS INDIA LIMITED
-
+For GAZON COMMUNICATIONS INDIA LIMITED
 </p>
 
 </div>
@@ -276,24 +254,45 @@ GAZON COMMUNICATIONS INDIA LIMITED
 
 <script>
 
+function generateInvoiceNumber() {
+
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+
+    let key = year + month; // 202604
+
+    let count = localStorage.getItem(key) || 0;
+    count++;
+
+    localStorage.setItem(key, count);
+
+    let serial = String(count).padStart(3, '0');
+
+    return key + serial; // 202604001
+}
+
 function generateBill() {
 
-document.getElementById("displayName").innerText =
-document.getElementById("customerName").value || "________";
+    document.getElementById("invoiceNumber").innerText =
+        generateInvoiceNumber();
 
-document.getElementById("displayDate").innerText =
-document.getElementById("invoiceDate").value || "________";
+    document.getElementById("displayName").innerText =
+        document.getElementById("customerName").value || "________";
 
-document.getElementById("displayCustomerId").innerText =
-document.getElementById("customerId").value || "________";
+    document.getElementById("displayDate").innerText =
+        document.getElementById("invoiceDate").value || "________";
 
-document.getElementById("displayDescription").innerText =
-document.getElementById("description").value || "________";
+    document.getElementById("displayCustomerId").innerText =
+        document.getElementById("customerId").value || "________";
 
+    document.getElementById("displayDescription").innerText =
+        document.getElementById("description").value || "________";
 }
 
 function downloadPDF() {
-window.print();
+    window.print();
 }
 
 </script>
