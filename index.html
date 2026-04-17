@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice Generator</title>
+
+<style>
+@page {
+    size: A4;
+    margin: 15mm;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-section {
+        display: none !important;
+    }
+
+    #downloadBtn {
+        display: none;
+    }
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.form-section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+input {
+    padding: 6px;
+    margin-right: 15px;
+}
+
+button {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.invoice-box {
+    border: 1px solid #000;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table, th, td {
+    border: 1px solid #000;
+}
+
+th, td {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.text-right {
+    text-align: right;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- FORM -->
+<div class="form-section">
+
+<label>Customer Name:</label>
+<input type="text" id="customerName">
+
+<label>Invoice Date:</label>
+<input type="date" id="invoiceDate">
+
+<label>Customer ID:</label>
+<input type="text" id="customerId">
+
+<label>Description:</label>
+<input type="text" id="description">
+
+<button onclick="generateBill()">Generate Bill</button>
+
+<button id="downloadBtn" onclick="downloadPDF()">
+Download PDF
+</button>
+
+</div>
+
+<!-- INVOICE -->
+
+<div id="invoice" class="invoice-box">
+
+<div class="header">
+
+<!-- FIXED LOGO -->
+<img
+<img src="/home/sachinhake/Desktop/Gazon_Bill/images/images.png"
+alt="Company Logo"
+class="logo">
+
+<div>
+<strong>GAZON COMMUNICATIONS INDIA LIMITED</strong><br>
+10TH FLOOR, OFFICE 166,<br>
+BLDG M CITY AVENUE, WAKAD,<br>
+PUNE - 411057<br>
+GST No: 27AAECG8392G1Z9
+</div>
+
+</div>
+
+<h2 style="text-align:center;">
+TAX INVOICE
+</h2>
+
+<table>
+
+<tr>
+<td>
+<strong>Customer Name:</strong>
+<span id="displayName">________</span>
+</td>
+
+<td>
+<strong>Invoice Date:</strong>
+<span id="displayDate">________</span>
+</td>
+</tr>
+
+<tr>
+<td>
+<strong>Customer ID:</strong>
+<span id="displayCustomerId">________</span>
+</td>
+
+<td>
+<strong>Due Date:</strong>
+Immediate
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<strong>Address:</strong>
+Karpe Nivas, Mayureshwar Colony,
+Ganesh Nagar, Wakad, Pune - 411057
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<strong>Mobile No:</strong>
+9373871386
+</td>
+</tr>
+
+</table>
+
+<table>
+
+<thead>
+<tr>
+<th>Sr. No</th>
+<th>Description</th>
+<th>Rate (INR)</th>
+<th>Amount (INR)</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>1</td>
+
+<td>
+<span id="displayDescription">
+________
+</span>
+</td>
+
+<td class="text-right">
+2500.00
+</td>
+
+<td class="text-right">
+2500.00
+</td>
+
+</tr>
+
+<tr>
+<td colspan="3" class="text-right">
+<strong>SGST + CGST</strong>
+</td>
+
+<td class="text-right">
+450.00
+</td>
+</tr>
+
+<tr>
+<td colspan="3" class="text-right">
+<strong>Total Amount</strong>
+</td>
+
+<td class="text-right">
+<strong>
+2950.00
+</strong>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<p>
+<strong>Rupees in Words:</strong>
+TWO Thousand, Nine Hundred And Fifty Only
+</p>
+
+<p>
+<strong>Remark:</strong>
+This bill is system generated.
+</p>
+
+<p style="margin-top:40px; text-align:right;">
+
+<strong>Authorised Signatory</strong><br>
+
+For  
+GAZON COMMUNICATIONS INDIA LIMITED
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function generateBill() {
+
+document.getElementById("displayName").innerText =
+document.getElementById("customerName").value || "________";
+
+document.getElementById("displayDate").innerText =
+document.getElementById("invoiceDate").value || "________";
+
+document.getElementById("displayCustomerId").innerText =
+document.getElementById("customerId").value || "________";
+
+document.getElementById("displayDescription").innerText =
+document.getElementById("description").value || "________";
+
+}
+
+function downloadPDF() {
+window.print();
+}
+
+</script>
+
+</body>
+</html>
